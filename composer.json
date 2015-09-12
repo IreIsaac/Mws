@@ -1,6 +1,6 @@
 {
-    "name": "IreIsaac/Mws",
-    "description": "Demo package for Websanova article.",
+    "name": "ireisaac/mws",
+    "description": "mws api",
     "keywords": ["laravel", "Amazon", "MWS"],
     "license": "MIT",
     "authors": [
