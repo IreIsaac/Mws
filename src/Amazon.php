@@ -32,9 +32,10 @@ class Amazon extends Client
 	public function __call($name, $args)
 	{
 		if(empty($args)){
-			return $this->api($name);
+			return $this->send($this->api($name));
 		}
-		return $this->api($name, $args[0]);
+		
+		return $this->send($this->api($name, $args[0]));
 	}
 
 	public function api($action, $query = [], $file = null, $options = [])
@@ -57,6 +58,6 @@ class Amazon extends Client
 
 		Signature::sign($request);
 
-		return $this->send($request);
+		return $request;
 	}
 }
