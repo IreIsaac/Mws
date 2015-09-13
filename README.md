@@ -30,11 +30,17 @@ composer require ireisaac\mws
 	'Mws'       => IreIsaac\Mws\Support\MwsFacade::class,
 ],
 ```
+### DON'T FORGET
+after adding the service provider, in the root of your laravel project run:
+```bash
+php artisan vendor:publish
+```
 Laravel Example:
 --------------------------
 The goal is to be able to call any MWS operation as a static method and pass any query params needed/wanted as an associative array. 
 ```php
 use Mws;
+use Carbon\Carbon;
 
 public function search($query)
 {
@@ -42,4 +48,16 @@ public function search($query)
 
 	return $response->xml();
 }
+
+public function orders()
+{
+	// Orders from the last week
+	$response = Mws::ListOrders([
+		'CreatedAfter' => Carbon::now()->subWeek()->toIso8601String()
+	]);
+
+	return $response->xml();
+}
 ```
+
+PS: this is the first package i've made public. Any help would be great, as this is  a work  in progress. Thanks
