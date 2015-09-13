@@ -1,9 +1,9 @@
 <?php
-namespace Ire\Mws\Support;
+namespace IreIsaac\Mws\Support;
 
-use Ire\Mws\Collection;
-use Ire\Mws\Signature;
-use Ire\Mws\Amazon;
+use IreIsaac\Mws\Collection;
+use IreIsaac\Mws\Signature;
+use IreIsaac\Mws\Amazon;
 use Illuminate\Support\ServiceProvider;
 
 class MwsServiceProvider extends ServiceProvider
@@ -15,7 +15,9 @@ class MwsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->publishes([
+            __DIR__.'/../config/amazon.php' => config_path('amazon.php')
+        ], 'config');
     }
 
     /**

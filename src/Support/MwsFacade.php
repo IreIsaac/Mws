@@ -1,5 +1,5 @@
 <?php
-namespace Ire\Mws\Support;
+namespace IreIsaac\Mws\Support;
 
 use Illuminate\Support\Facades\Facade;
 
