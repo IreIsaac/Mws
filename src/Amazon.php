@@ -3,6 +3,8 @@ namespace IreIsaac\Mws;
 
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Event\ErrorEvent;
+use GuzzleHttp\Exception\RequestException;
 use IreIsaac\Mws\Signature;
 use IreIsaac\Mws\Collection;
 
@@ -27,7 +29,15 @@ class Amazon extends Client
 		
 	}
 
-	public function call($action, $query = [], $file = null, $options = [])
+	public function __call($name, $args)
+	{
+		if(empty($args)){
+			return $this->api($name);
+		}
+		return $this->api($name, $args[0]);
+	}
+
+	public function api($action, $query = [], $file = null, $options = [])
 	{
 		$action = studly_case($action);
 		$this->checkAction($action);
@@ -46,7 +56,7 @@ class Amazon extends Client
 		}
 
 		Signature::sign($request);
-		
+
 		return $this->send($request);
 	}
 }
