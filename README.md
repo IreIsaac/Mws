@@ -1,4 +1,4 @@
-# IreIsaac: Amazon Marketplace Web Services
+# Simple MWS
 package to help simplify requests to MWS. Heavily relys on GuzzleHttp.
 
 Make sure to add the .env file in the root of your project, or add to your .env file, the following lines. There is also .env.example file included. 
