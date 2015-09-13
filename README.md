@@ -32,12 +32,13 @@ composer require ireisaac\mws
 ```
 Laravel Example:
 --------------------------
+The goal is to be able to call any MWS operation as a static method and pass any query params needed/wanted as an associative array. 
 ```php
 use Mws;
 
 public function search($query)
 {
-	$response = Mws::listMatchingProducts(['Query' => 'some product on amazon']);
+	$response = Mws::listMatchingProducts(['Query' => $query]);
 
 	return $response->xml();
 }
