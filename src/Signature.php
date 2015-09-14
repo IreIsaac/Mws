@@ -3,7 +3,7 @@ namespace IreIsaac\Mws;
 
 use Exception;
 use Carbon\Carbon;
-
+use GuzzleHttp\Message\Request;
 /**
 * 
 */
@@ -22,13 +22,13 @@ class Signature
             'Timestamp'        => Carbon::now()->toIso8601String(),
         ];
     }
-    
-    public static function sign($request)
+
+    public function signer(Request $request)
     {
-        $signature = new static;
         $query = $request->getQuery();
-        $query->merge($signature->defaults);
+        $query->merge($this->defaults);
         $newQuery = $query->toArray();
+
         if (str_contains(strtolower($request->getPath()), 'orders')) {
             $newQuery['MarketplaceId.Id.1'] = $newQuery['MarketplaceId'];
             unset($newQuery['MarketplaceId']);
@@ -52,5 +52,21 @@ class Signature
         ));
 
         $request->getQuery()->set('Signature', $signature);
+
+        return $request;
+    }
+    
+    /**
+     * Add an Mws Signature to a request
+     * not the best method, but takes care of everything
+     * @param  GuzzleHttp\Message\Request $request
+     * @return GuzzleHttp\Message\Request $request
+     */
+    public static function sign(Request $request)
+    {
+        $signature = new static;
+        $signature->signer($request);
+        
+        return $request;
     }
 }
