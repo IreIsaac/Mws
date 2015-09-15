@@ -6,11 +6,13 @@ use IreIsaac\Mws\Collection;
 
 abstract class Api
 {
-	public function client($endpoint = 'https://mws.amazonservices.com')
+	protected $client;
+
+	public function __construct($endpoint = 'https://mws.amazonservices.com')
 	{
 		$collection = new Collection();
 
-        return new Mws($collection, $endpoint);
+        $this->client = new Mws($collection, $endpoint);
 	}
 
 	protected function cleanQuery(array $query, array $allowed)
