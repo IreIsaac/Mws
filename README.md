@@ -60,6 +60,3 @@ public function orders()
 }
 ```
 Notice you can call operations formatted with the first letter capitalized (studly case), or lowercase (snake case).
-
-
-PS: this is the first package i've made public. Any help would be great, as this is  a work  in progress. Thanks
